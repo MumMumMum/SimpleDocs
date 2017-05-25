@@ -1,0 +1,32 @@
+q1)bel_x_init = helpers.normalize_vector(bel_x_init);
+this is the initail belief, which will be a uniform probality disturbution (straight line) over
+all the states.
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+q2)	//transition probabilities:
+float transition_prob = helpers.normpdf(distance_ij,
+                    								controls.delta_x_f,
+ control_std) ;
+
+what is helpers.normpdf doing.
+Does it generate random transition probablity.
+controls.delta_x_f is it the current reading of robot?
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+q3)posterior_motion += transition_prob*bel_x_init[j];
+this is the belief after motion, here there is loss .
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+q4)float range_l = map_1d.landmark_list[l].x_f - pose_i;
+This is the distance of all landmarks from the current position.
+Why do we have to calculate distance to all landmarks.
+Distance to next nearest landmark would be sufficent?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ I have a list of dist  x to all landmark this is Psudorange vector
+Now I really dint get how did we calculate posterior motion using 
+//estimate the posterior for observation model: 
+			
+posterior_obs*= helpers.normpdf(observations.distance_f[z], 
+											pseudo_range_min,observation_std);
+
+What does this helpers.normpdf(observations.distance_f[z], 
+											pseudo_range_min,observation_std);really return in real sense
+ 
